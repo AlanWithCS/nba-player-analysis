@@ -12,7 +12,6 @@ export class Main extends React.Component {
         nba.stats.playerInfo({ PlayerID: this.state.playerId })
             .then((info) => {
                 let playerInfo = Object.assign(info.commonPlayerInfo[0], info.playerHeadlineStats[0]);
-                console.log('playerInfo', playerInfo);
                 this.setState({ playerInfo });
             })
             .catch((e) => console.log(e));
