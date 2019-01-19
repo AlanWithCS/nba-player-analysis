@@ -22,7 +22,12 @@ export class Main extends React.Component {
         return (
             <div className={"main"}>
                 <Profile playerInfo={this.state.playerInfo}/>
-                <ShotChart playerId={this.state.playerId}/>
+                <ShotChart
+                    playerId={this.state.playerId}
+                    minCount={10}
+                    displayToolTips={false}
+                    charType={"hexbin"}
+                />
             </div>
         );
     };
