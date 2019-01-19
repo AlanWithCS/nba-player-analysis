@@ -28,13 +28,14 @@ export class DataViewContainer extends React.Component {
     };
 
     render() {
-        const { charType } = this.state;
+        const { charType, minCount, displayToolTips} = this.state;
+        console.log(this.state);
         return (
             <div className={"data-view"}>
                 <ShotChart
                     playerId={this.props.playerId}
-                    minCount={2}
-                    displayToolTips={true}
+                    minCount={minCount}
+                    displayToolTips={displayToolTips}
                     charType={charType}
                 />
                 <CountSlider
