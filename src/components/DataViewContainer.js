@@ -2,6 +2,7 @@ import React from 'react';
 import {ShotChart} from "./ShotChart";
 import {CountSlider} from "./CountSlider";
 import {Radio, Switch} from "antd";
+import _ from 'lodash';
 
 const RadioGroup = Radio.Group;
 
@@ -13,7 +14,6 @@ export class DataViewContainer extends React.Component {
     };
 
     onMinCountChange = (minCount) => {
-        console.log("mincount: ", minCount);
         this.setState({minCount});
     };
 
@@ -38,7 +38,7 @@ export class DataViewContainer extends React.Component {
                     charType={charType}
                 />
                 <CountSlider
-                    onChange={this.onMinCountChange}
+                    onChange={_.debounce(this.onMinCountChange, 500)}
                 />
                 <RadioGroup onChange={this.onCharTypeChange} value={charType}>
                     <Radio value={"hexbin"}>Hexbin</Radio>
