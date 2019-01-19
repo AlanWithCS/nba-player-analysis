@@ -1,7 +1,7 @@
 import React from 'react';
 import {ShotChart} from "./ShotChart";
 import {CountSlider} from "./CountSlider";
-import {Radio, Switch} from "antd";
+import {Radio, Switch, Row, Col} from "antd";
 import _ from 'lodash';
 
 const RadioGroup = Radio.Group;
@@ -29,7 +29,6 @@ export class DataViewContainer extends React.Component {
 
     render() {
         const { charType, minCount, displayToolTips} = this.state;
-        console.log(this.state);
         return (
             <div className={"data-view"}>
                 <ShotChart
@@ -38,19 +37,45 @@ export class DataViewContainer extends React.Component {
                     displayToolTips={displayToolTips}
                     charType={charType}
                 />
-                <CountSlider
-                    onChange={_.debounce(this.onMinCountChange, 500)}
-                />
-                <RadioGroup onChange={this.onCharTypeChange} value={charType}>
-                    <Radio value={"hexbin"}>Hexbin</Radio>
-                    <Radio value={"scatter"}>Scatter</Radio>
-                </RadioGroup>
-                <Switch
-                    checkedChildren="On"
-                    unCheckedChildren="Off"
-                    defaultChecked
-                    onChange={this.onToolTipChange}
-                />
+                <div className={"filters"}>
+                {
+                    charType === "hexbin" ?
+                        <Row className={"filter-row"}>
+                            <Col offset={5} span={2} className={"filter-label"}>
+                                Shots:
+                            </Col>
+                            <Col span={16}>
+                                <CountSlider
+                                    className={"filter-control"}
+                                    onChange={_.debounce(this.onMinCountChange, 500)}
+                                    value = {minCount}
+                                />
+                            </Col>
+                        </Row> : null
+                }
+                <Row className={"filter-row"}>
+                    <Col offset={5} span={10}>
+                        <RadioGroup
+                            className={"filter-control"}
+                            onChange={this.onCharTypeChange}
+                            value={charType}>
+                            <Radio value={"hexbin"}>Hexbin</Radio>
+                            <Radio value={"scatter"}>Scatter</Radio>
+                        </RadioGroup>
+                    </Col>
+                    <Col span={2}>
+                        ToolTip:
+                    </Col>
+                    <Col span={3}>
+                        <Switch
+                            checkedChildren="On"
+                            unCheckedChildren="Off"
+                            defaultChecked
+                            onChange={this.onToolTipChange}
+                        />
+                    </Col>
+                </Row>
+                </div>
             </div>
         );
     }
