@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoComplete } from 'antd';
+import { AutoComplete, Input, Icon } from 'antd';
 
 export class SearchBar extends React.Component {
     state = {
@@ -18,19 +18,21 @@ export class SearchBar extends React.Component {
                 value + value + value,
             ],
         });
-    }
-
+    };
 
     render() {
         const { dataSource } = this.state;
         return (
             <AutoComplete
                 dataSource={dataSource}
-                style={{ width: 200 }}
+                className={"search-bar"}
                 onSelect={this.onSelect}
                 onSearch={this.handleSearch}
-                placeholder="input here"
-            />
+                placeholder="Search NBA Player"
+                size={"large"}
+            >
+                <Input suffix={<Icon type="search" className="certain-category-icon" />} />
+            </AutoComplete>
         );
     }
 }
