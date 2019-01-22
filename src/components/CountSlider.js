@@ -9,10 +9,11 @@ export class CountSlider extends React.Component {
     };
 
     onChange = (value) => {
+        let cleanValue = Number(value) ? value : this.state.inputValue;
         this.setState({
-            inputValue: value,
+            inputValue: cleanValue,
         });
-        this.props.onChange(value);
+        this.props.onChange(cleanValue);
     };
 
     render() {
